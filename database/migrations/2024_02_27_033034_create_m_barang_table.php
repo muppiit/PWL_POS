@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id')->index();
             $table->string('barang_kode', 10)->unique();
             $table->string('barang_nama', 100);
-            $table->integer('harga_beli', 11);
-            $table->integer('harga_jual', 11);
+            $table->integer('harga_beli');
+            $table->integer('harga_jual');
             $table->timestamps();
 
 
