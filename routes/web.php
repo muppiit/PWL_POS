@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 Route::get("/level", [levelController::class, "index"]);
 Route::get("/kategori", [kategoriController::class, "index"]);
-Route::get("/user", [UserController::class, "index"]);
+Route::get("/user", [UserController::class, "index"])->name("/user");
 Route::get("/user/tambah", [UserController::class, "tambah"])->name("/user/tambah");
 Route::post("/user/tambah_simpan", [UserController::class, "tambah_simpan"])->name("/user/tambah_simpan");
 Route::get("/user/ubah/{id}", [UserController::class, "ubah"])->name("/user/ubah");
