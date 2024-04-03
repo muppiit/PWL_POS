@@ -6,34 +6,34 @@
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            @empty($kategori)
+            @empty($level)
                 <div class="alert alert-danger alert-dismissible">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
                     Data yang Anda cari tidak ditemukan.
                 </div>
-                <a href="{{ url('kategori') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+                <a href="{{ url('level') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
             @else
-                <form method="POST" action="{{ url('/kategori/' . $kategori->kategori_id) }}" class="form-horizontal">
+                <form method="POST" action="{{ url('/level/' . $level->level_id) }}" class="form-horizontal">
                     @csrf
                     {!! method_field('PUT') !!}
                     <!-- tambahkan baris ini untuk proses edit
                     yang butuh method PUT -->
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Nama kategori</label>
+                        <label class="col-1 control-label col-form-label">Nama Level</label>
                         <div class="col-11">
-                            <input type="text" class="form-control" name="kategori_nama"
-                                value="{{ $kategori->kategori_nama }}" required>
-                            @error('kategori_nama')
+                            <input type="text" class="form-control" name="level_nama" value="{{ $level->level_nama }}"
+                                required>
+                            @error('level_nama')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Kode kategori</label>
+                        <label class="col-1 control-label col-form-label">Kode Level</label>
                         <div class="col-11">
-                            <input type="text" class="form-control" name="kategori_kode"
-                                value="{{ $kategori->kategori_kode }}" required>
-                            @error('kategori_kode')
+                            <input type="text" class="form-control" name="level_kode" value="{{ $level->level_kode }}"
+                                required>
+                            @error('level_kode')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -42,7 +42,7 @@
                         <label class="col-1 control-label col-form-label"></label>
                         <div class="col-11">
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <a class="btn btn-sm btn-default ml-1" href="{{ url('kategori') }}">Kembali</a>
+                            <a class="btn btn-sm btn-default ml-1" href="{{ url('level') }}">Kembali</a>
                         </div>
                     </div>
                 </form>
