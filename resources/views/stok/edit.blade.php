@@ -13,11 +13,10 @@
                 </div>
                 <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
             @else
-                <form method="POST" action="{{ url('/stok/' . $stok->stok_id) }}" class="form-horizontal">
+                <form method="POST" action="{{ url('/stok/' . $stok->stock_id) }}" class="form-horizontal">
                     @csrf
                     {!! method_field('PUT') !!}
-                    <!-- tambahkan baris ini untuk proses edit
-                    yang butuh method PUT -->
+                    <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
                     <div class="form-group row">
                         <label class="col-2 control-label col-form-label">Kode Barang</label>
                         <div class="col-10">
@@ -45,7 +44,7 @@
                         <div class="col-10">
                             <input type="datetime-local" class="form-control" name="stok_tanggal"
                                 value="{{ $stok->stok_tanggal }}" required>
-                            @error('stok_jumlah')
+                            @error('stok_tanggal')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>

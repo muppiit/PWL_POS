@@ -157,13 +157,19 @@ class BarangController extends Controller
      */
     public function destroy(string $id)
     {
-        $check = BarangModel::find($id);
-        if (!$check) {
+        $barang = BarangModel::find($id);
+
+        if (!$barang) {
             return redirect('/barang')->with('error', 'Data barang tidak ditemukan');
         }
 
         try {
-            BarangModel::destroy($id);
+            // Hapus stok terkait dengan barang
+            StokModel::where('barang_id', $id)->delete();
+
+            // Hapus barang
+            $barang->delete();
+
             return redirect('/barang')->with('success', 'Data barang berhasil dihapus');
         } catch (\Exception $e) {
             return redirect('/barang')->with('error', 'Data barang gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
