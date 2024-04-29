@@ -88,7 +88,7 @@ class PenjualanController extends Controller
             'harga' => 'required',
         ]);
         $penjualan = new PenjualanModel();
-        $penjualan->user_id = '4';
+        $penjualan->user_id = '5';
         $penjualan->pembeli = $validated['pembeli'];
         $penjualan->penjualan_kode = 'JL' . date('YmdHis');
         $penjualan->penjualan_tanggal = $validated['tanggal'];
