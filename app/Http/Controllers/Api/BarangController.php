@@ -4,33 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangModel;
-use App\Models\StokModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BarangController extends Controller
 {
     public function index()
     {
-        return BarangModel::with('stok')->get();
+        return BarangModel::all();
     }
     public function store(Request $request)
     {
-        $barang = BarangModel::create($request->all());
-        $stok = StokModel::create([
-            'barang_id' => $barang->barang_id,
-            'user_id' => auth('api')->user()->user_id,
-            'stok_tanggal' => $request->stok_tanggal,
-            'stok_jumlah' => $request->stok_jumlah
+        $validator = Validator::make($request->all(),[
+            'kategori_id' => 'required|exists:m_kategori,kategori_id',
+            'barang_kode' => 'required|string',
+            'barang_nama' => 'required|string',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $data = [
-            'barang' => $barang,
-            'stok' => $stok
-        ];
-        return response()->json($data, 201);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        $barang = BarangModel::create([
+            'kategori_id' => $request->kategori_id,
+            'barang_kode' => $request->barang_kode,
+            'barang_nama' => $request->barang_nama,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'image' => $request->image->hashName()
+        ]);
+        return response()->json($barang, 201);
     }
     public function show(BarangModel $barang)
     {
-        return BarangModel::with('stok')->find($barang->barang_id);
+        return $barang;
     }
     public function update(Request $request, BarangModel $barang)
     {
