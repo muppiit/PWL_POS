@@ -76,13 +76,23 @@ class BarangController extends Controller
             'harga_jual' => 'required|numeric',
             'stok_jumlah' => 'required|numeric',
             'stok_tanggal' => 'required',
+            'berkas' => 'required'
         ]);
+
+        $extFile = $request->berkas->extension();
+        $nama = $request->kode . " - " . $request->nama . ".$extFile";
+        // Pindahkan gambar ke folder
+        $path = $request->berkas->move('gambar', $nama);
+        $path = str_replace("\\", "//", $path);
+        $pathBaru = asset('gambar/' . $nama);
+
         $dataBarang = [
             'kategori_id' => $validated['kategori_id'],
             'barang_kode' => $validated['barang_kode'],
             'barang_nama' => $validated['barang_nama'],
             'harga_beli' => $validated['harga_beli'],
             'harga_jual' => $validated['harga_jual'],
+            'image' => $pathBaru,
         ];
         $barang = BarangModel::create($dataBarang);
         $dataStok = [

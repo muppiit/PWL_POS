@@ -30,6 +30,10 @@
                         <td>{{ $barang->kategori->kategori_nama }}</td>
                     </tr>
                     <tr>
+                        <th>Gambar</th>
+                        <td><img src="{{ $barang->image }}" alt="" style="width: 100px; height: 100px; object-fit: cover;"></td>
+                    </tr>
+                    <tr>
                         <th>Jumlah Stok</th>
                         <td>{{ $barang->stok->stok_jumlah }}</td>
                     </tr>
